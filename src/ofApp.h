@@ -24,12 +24,13 @@ class ofApp : public ofBaseApp{
     void checkInput(string input);
     void setWordsFromLine(string line);
     
-    void readInText(string filename, bool clearText, bool playSound);
     vector<string> getLinesWithSameWord(string targetWord, string lineToIgnore);
     string toLowerCase(string input);
     
     void loadAllText();
     void loadRandomText();
+    
+    void loadText(string filename, bool clearText, bool playSound);
     
     //timing
     float prevFrameTime;

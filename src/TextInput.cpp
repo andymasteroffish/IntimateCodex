@@ -16,15 +16,15 @@ void TextInput::setup(ofTrueTypeFont * _font){
     
     checkInput = false;
     
-    enterSound.loadSound("enter.wav");
+    enterSound.load("audio/enter.wav");
     enterSound.setMultiPlay(true);
     
-    backspaceSound.loadSound("backspace.wav");
+    backspaceSound.load("audio/backspace.wav");
     backspaceSound.setMultiPlay(true);
     
     for (int i=0; i<4; i++){
         ofSoundPlayer keySound;
-        keySound.loadSound("key"+ofToString(i)+".wav");
+        keySound.load("audio/key"+ofToString(i)+".wav");
         keySound.setMultiPlay(true);
         strokeSounds.push_back(keySound);
     }

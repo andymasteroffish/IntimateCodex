@@ -13,28 +13,27 @@ void ofApp::setup(){
 //    font.loadFont("Eric Normal.ttf", 50);
 //    fontInput.loadFont("Eric Normal.ttf", 70);    
     
-    font.loadFont("FutuLt__.ttf", 50);
-    fontInput.loadFont("FutuLt__.ttf", 70);
+    font.load("FutuLt__.ttf", 50);
+    fontInput.load("FutuLt__.ttf", 70);
     
     textInput.setup(&fontInput);
     
-    loadDing.loadSound("ding.wav");
+    loadDing.load("audio/ding.wav");
     
     fullText.clear();
     
-    //readInText("text/dune.txt");
     //readInText("text/macbeth.txt", true);
     loadAllText();
     
     for (int i=0; i<6; i++){
         ofSoundPlayer whooshSound;
         whooshSounds.push_back(whooshSound);
-        whooshSounds[i].loadSound("whoosh"+ofToString(i)+".wav");
+        whooshSounds[i].load("audio/whoosh"+ofToString(i)+".wav");
         whooshSounds[i].setMultiPlay(true);
         whooshSounds[i].setVolume(0.2);
     }
     
-    bgSound.loadSound("rain_and_birds.mp3");
+    bgSound.load("audio/rain_and_birds.mp3");
     bgSound.setVolume(0.9);
     bgSound.setLoop(true);
     bgSound.play();
@@ -65,7 +64,7 @@ void ofApp::draw(){
     //manual bg clear with transparency
     ofSetColor(0, 10);
     ofFill();
-    ofRect(0,0, ofGetWidth(), ofGetHeight());
+    ofDrawRectangle(0,0, ofGetWidth(), ofGetHeight());
     
     background.draw();
     
@@ -149,7 +148,7 @@ void ofApp::checkInput(string input){
             //otherwise, just try to load the given file
             string file = "text/" + commandText.substr(4, commandText.length()) + ".txt";
             cout<<"load:"<<file<<endl;
-            readInText(file, true, true);
+            loadText(file, true, true);
         }
     }
     
@@ -222,54 +221,6 @@ void ofApp::setWordsFromLine(string line){
 }
 
 //--------------------------------------------------------------
-void ofApp::readInText(string filename, bool clearText, bool playSound){
-    
-    
-    ofBuffer buffer = ofBufferFromFile(filename);
-    
-    if (buffer.size()){
-        if (clearText){
-            fullText.clear();
-            fullTextLower.clear();
-        }
-        
-        while(buffer.isLastLine() == false){
-            
-            string line = buffer.getNextLine();
-            
-            if (line.length() > 5){
-            
-                string lowerLine = toLowerCase(line);
-                fullText.push_back(line);
-                fullTextLower.push_back(lowerLine);
-            }
-            
-//            cout<<line<<endl;
-//            cout<<lowerLine<<endl;
-            
-        }
-        
-        cout<<"loaded "<<filename;
-        if (clearText){
-            cout<<" and cleared the old text";
-        }
-        cout<<endl;
-        
-        if (playSound){
-            loadDing.play();
-        }
-        
-        setWordsFromLine(fullText[ (int) ofRandom(fullText.size()) ]);
-        
-    }
-    else{
-        cout<<"aint nothing there"<<endl;
-    }
-    
-    cout<<"total lines: "<<fullText.size()<<endl;
-}
-
-//--------------------------------------------------------------
 vector<string> ofApp::getLinesWithSameWord(string targetWord, string lineToIgnore){
     vector<string> returnList;
     
@@ -335,7 +286,7 @@ void ofApp::loadAllText(){
     ofDirectory dir;
     dir.listDir("text");
     for (int i=0; i<dir.size(); i++){
-        readInText(dir.getPath(i), i==0, i==dir.size()-1);
+        loadText(dir.getPath(i), i==0, i==dir.size()-1);
     }
 }
 
@@ -343,5 +294,51 @@ void ofApp::loadAllText(){
 void ofApp::loadRandomText(){
     ofDirectory dir;
     dir.listDir("text");
-    readInText(dir.getPath((int)ofRandom(dir.size())), true, true);
+    loadText(dir.getPath((int)ofRandom(dir.size())), true, true);
+}
+
+//--------------------------------------------------------------
+void ofApp::loadText(string filename, bool clearText, bool playSound){
+    
+    
+    ofBuffer buffer = ofBufferFromFile(filename);
+    
+    if (buffer.size()){
+        if (clearText){
+            fullText.clear();
+            fullTextLower.clear();
+        }
+        
+        while(buffer.isLastLine() == false){
+            
+            string line = buffer.getNextLine();
+            
+            if (line.length() > 5){
+                
+                string lowerLine = toLowerCase(line);
+                fullText.push_back(line);
+                fullTextLower.push_back(lowerLine);
+            }
+            
+            
+        }
+        
+        cout<<"loaded "<<filename;
+        if (clearText){
+            cout<<" and cleared the old text";
+        }
+        cout<<endl;
+        
+        if (playSound){
+            loadDing.play();
+        }
+        
+        setWordsFromLine(fullText[ (int) ofRandom(fullText.size()) ]);
+        
+    }
+    else{
+        cout<<"aint nothing there"<<endl;
+    }
+    
+    cout<<"total lines: "<<fullText.size()<<endl;
 }

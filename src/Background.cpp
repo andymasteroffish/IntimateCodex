@@ -30,6 +30,6 @@ void Background::update(){
 void Background::draw(){
     ofSetColor(255);
     for (int i=0; i<points.size(); i++){
-        ofRect(points[i].x, points[i].y, 1,1);
+        ofDrawRectangle(points[i].x, points[i].y, 1,1);
     }
 }
