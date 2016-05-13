@@ -310,7 +310,6 @@ void ofApp::loadText(string filename, bool clearText, bool playSound){
         }
         
         while(buffer.isLastLine() == false){
-            
             string line = buffer.getNextLine();
             
             if (line.length() > 5){
