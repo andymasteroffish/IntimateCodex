@@ -22,6 +22,8 @@ void ofApp::setup(){
     
     fullText.clear();
     
+    loadIgnoreWords();
+    
     //readInText("text/macbeth.txt", true);
     loadAllText();
     
@@ -41,6 +43,7 @@ void ofApp::setup(){
     setWordsFromLine(fullText[ (int) ofRandom(fullText.size()) ]);
     
     ofEnableAlphaBlending();
+    
 }
 
 //--------------------------------------------------------------
@@ -51,7 +54,7 @@ void ofApp::update(){
     string lowerCaseEntry = toLowerCase(textInput.inputString);
 
     for (int i=0; i<curWords.size(); i++){
-        curWords[i].update(deltaTime, lowerCaseEntry);
+        curWords[i].update(deltaTime, lowerCaseEntry, curHighNumMatches);
     }
     
     textInput.update();
@@ -202,8 +205,19 @@ void ofApp::setWordsFromLine(string line){
         //cout<<i<<":"<<rawWords[i]<<endl;
         Word thisWord;
         int numMatches = getLinesWithSameWord(rawWords[i], curLine).size();
+        string lowercaseWord = toLowerCase(rawWords[i]);;
+        bool isIgnoreWord = isWordAnIgnoreWord(lowercaseWord);
+        if (isIgnoreWord){
+            //cout<<"we ignore "<<lowercaseWord<<endl;
+            numMatches = 0;
+        }
         thisWord.setup(rawWords[i], &font, &whooshSounds[ (int)ofRandom(whooshSounds.size())], curTimeOffset, numMatches);
-        thisWord.lowercaseText = toLowerCase(rawWords[i]);
+        thisWord.lowercaseText = lowercaseWord;
+        
+        if (numMatches > curHighNumMatches){
+            curHighNumMatches = numMatches;
+            //cout<<"high word: "<<thisWord.lowercaseText<<" with "<<curHighNumMatches<<endl;
+        }
      
         if (curX + thisWord.width > ofGetWidth() - textPaddingXMin){
             curX = ofRandom(textPaddingXMin, textPaddingXMax);;
@@ -279,7 +293,35 @@ string ofApp::toLowerCase(string input){
     return returnVal;
 }
 
+//--------------------------------------------------------------
+bool ofApp::isWordAnIgnoreWord(string input){
+    for (int i=0; i<ignoreWords.size(); i++){
+        if (ignoreWords[i] == input){
+            return true;
+        }
+    }
+    return false;
+}
 
+//--------------------------------------------------------------
+void ofApp::loadIgnoreWords(){
+    ofBuffer buffer = ofBufferFromFile("ignore_words.txt");
+    ignoreWords.clear();
+    
+    if (buffer.size()){
+        
+        while(buffer.isLastLine() == false){
+            string line = buffer.getNextLine();
+            
+            ignoreWords.push_back( toLowerCase(line));
+        }
+    }
+    else{
+        cout<<"could not find ignore list"<<endl;
+    }
+    
+    //cout<<"total ignore words: "<<ignoreWords.size()<<endl;
+}
 
 //--------------------------------------------------------------
 void ofApp::loadAllText(){
@@ -331,6 +373,8 @@ void ofApp::loadText(string filename, bool clearText, bool playSound){
         if (playSound){
             loadDing.play();
         }
+        
+        curHighNumMatches = 0;
         
         setWordsFromLine(fullText[ (int) ofRandom(fullText.size()) ]);
         

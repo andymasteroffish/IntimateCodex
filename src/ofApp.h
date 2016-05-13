@@ -27,6 +27,9 @@ class ofApp : public ofBaseApp{
     vector<string> getLinesWithSameWord(string targetWord, string lineToIgnore);
     string toLowerCase(string input);
     
+    bool isWordAnIgnoreWord(string input);
+    
+    void loadIgnoreWords();
     void loadAllText();
     void loadRandomText();
     
@@ -43,6 +46,10 @@ class ofApp : public ofBaseApp{
     ofTrueTypeFont font, fontInput;
     string curLine;
     vector<Word> curWords;
+    
+    int curHighNumMatches;
+    
+    vector<string> ignoreWords;
     
     //enterring text
     TextInput textInput;

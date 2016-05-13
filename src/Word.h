@@ -17,7 +17,7 @@ public:
     
     void setup(string _text, ofTrueTypeFont * _font, ofSoundPlayer * _sound, float _timer, int _numMatches);
     void setPos(float x, float y);
-    void update(float deltaTime, string curEntry);
+    void update(float deltaTime, string curEntry, int highNumMatches);
     void draw();
     
     string text, lowercaseText;

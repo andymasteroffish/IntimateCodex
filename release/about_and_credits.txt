@@ -1,0 +1,70 @@
+Intimate Codex by Andy Wallace
+v1.0
+www.andymakesgames.com
+
+———————————————————
+About
+———————————————————
+
+This is a small text experiment I made in October of 2015 in openFrameworks to show at a friend’s party. It allows you to explore a body of text by using keywords to jump between lines, allowing linear media to be explored and interacted with in the style of a text adventure. 
+
+Right now if has the following four texts in it, but you are free to replace them with your own:
+-Script to Bladerunner
+-The Martian Chronicles by Ray Bradbury
+-Several Harlan Ellison short stories
+-Macbeth
+
+
+———————————————————
+How To Use
+———————————————————
+
+All of the text is loaded from data/text. The data folder must be in the same place as the app for it to work.
+
+All text files in the data/text folder will be loaded when the application starts. You are free to add your own files and remove the ones in there by default. Files must use the extension “.txt”
+
+While the app is running, you can load a single text file from that folder by writing
+“load[name of text file without txt extension]”
+
+For example, to load bladerunner.txt, you would type “loadbladerunner” in the app.
+You will hear a ding if it found a file to load.
+
+You can type “loadall” to load everything in the text folder. This is what the app does by default when it first launches.
+
+You can toggle full screen by clicking the top left corner of the app.
+
+
+
+———————————————————
+Sound Credits
+———————————————————
+
+Rain sound by Ramagochi
+https://freesound.org/people/ramagochi/sounds/120742/
+
+Enter sound by Archos
+https://freesound.org/people/Archos/sounds/168235/
+
+Backspace sound by ddohler
+https://freesound.org/people/ddohler/sounds/9098/
+
+Whoosh sound by Robinhood76
+https://freesound.org/people/Robinhood76/sounds/101432/
+
+All other sounds were made available under a Creative Commons Non Attribution license.
+
+
+———————————————————
+Text Credits
+———————————————————
+These are the texts that Intimate Codex uses by default, which can be found in the data/text folder.
+
+Script of Bladerunner by Hampton Fancher & David Peoples
+The Martian Chronicles by Ray Bradbury
+I Have No Mouth And I Must Scream by Harlan Ellison
+Paladin of the Lost Hour by Harlan Ellison
+“Repent, Harlequin!” Said the Ticktockman by Harlan Ellison
+The Beast That Shouted Love at the Heart of the World by Harlan Ellison
+Macbeth by William Shakespeare
+
+

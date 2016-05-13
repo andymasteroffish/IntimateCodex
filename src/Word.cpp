@@ -31,7 +31,7 @@ void Word::setPos(float x, float y){
 }
 
 
-void Word::update(float deltaTime, string curEntry){
+void Word::update(float deltaTime, string curEntry, int highNumMatches){
     timer += deltaTime;
     
     float range = 40;
@@ -39,12 +39,14 @@ void Word::update(float deltaTime, string curEntry){
     
     ofVec2f shake(0,0);
     
+    int highShakeMatchNumber = MIN(20, highNumMatches/4);
+    
     if (numMatches > 1){
-        speed = ofMap(numMatches, 0, 15, 0.1, 0.2, true);// 0.1;
+        speed = ofMap(numMatches, 0, highShakeMatchNumber, 0.1, 0.2, true);// 0.1;
     }
     
     if (numMatches > 5){
-        float shakeVal = ofMap(numMatches, 1, 60, 0, 3.5, true);
+        float shakeVal = ofMap(numMatches, 1, highNumMatches*0.75, 0, 3.5, true);
         shake.x = ofRandom(-shakeVal, shakeVal);
         shake.y = ofRandom(-shakeVal, shakeVal);
     }
