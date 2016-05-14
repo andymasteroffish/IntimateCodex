@@ -1,5 +1,5 @@
 ———————————————————
-What is it?
+What is this?
 ———————————————————
 
 Intimate Codex is a text explorer that lets you explore static text form a more first person perspective. Books or poems or whatever you feed into it are broken up into lines that you can bounce between by typing in text-adventure style commands (the overall experience was inspired by Her Story).
