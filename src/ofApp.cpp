@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	ofSetFrameRate(60);
     ofSetBackgroundAuto(false);
     ofBackground(0);
     
@@ -110,7 +111,8 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     if (x < 50 && y < 50){
-        ofToggleFullscreen();
+		ofToggleFullscreen();
+		background.shuffle();
     }
 }
 

@@ -17,6 +17,7 @@ public:
     void setup();
     void update();
     void draw();
+	void shuffle();
     
     vector<ofVec2f> points;
     

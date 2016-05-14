@@ -33,3 +33,9 @@ void Background::draw(){
         ofDrawRectangle(points[i].x, points[i].y, 1,1);
     }
 }
+
+void Background::shuffle() {
+	for (int i = 0; i<points.size(); i++) {
+		points[i].set(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()));
+	}
+}
