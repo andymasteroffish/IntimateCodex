@@ -1,39 +1,74 @@
-Intimate Codex by Andy Wallace
-v1.0
-www.andymakesgames.com
-
 ———————————————————
-About
+What is it?
 ———————————————————
 
-This is a small text experiment I made in October of 2015 in openFrameworks to show at a friend’s party. It allows you to explore a body of text by using keywords to jump between lines, allowing linear media to be explored and interacted with in the style of a text adventure. 
+Intimate Codex is a text explorer that lets you explore static text form a more first person perspective. Books or poems or whatever you feed into it are broken up into lines that you can bounce between by typing in text-adventure style commands (the overall experience was inspired by Her Story).
 
-Right now if has the following four texts in it, but you are free to replace them with your own:
--Script to Bladerunner
--The Martian Chronicles by Ray Bradbury
--Several Harlan Ellison short stories
--Macbeth
+Instead of full commands, though, you type in a single word and are brought to a new passage that shares that word.
 
+By providing connections between different passages (and even entirely different works) based on keywords and randomness new narratives and means appear that can be vastly different from the original, linear stories.
 
 ———————————————————
-How To Use
+Who made this?
 ———————————————————
 
-All of the text is loaded from data/text. The data folder must be in the same place as the app for it to work.
+Me, Andy Wallace! You can check out my website at andymakesgames.com or follow me on twitter @andy_makes!
 
-All text files in the data/text folder will be loaded when the application starts. You are free to add your own files and remove the ones in there by default. Files must use the extension “.txt”
+———————————————————
+It it a game?
+———————————————————
+
+Maybe! There are no goals and no way to win or loose, but the experience is definitely playful.
+
+———————————————————
+Is it poetry?
+———————————————————
+
+Probably!
+
+———————————————————
+Can I change What text files that it draws from?
+———————————————————
+
+Absolutely! There are several fantastic public domain novels that come preloaded with Intimate Codex, but you are encouraged to swap them out for your own!
+
+All of the text is loaded from data/text folder. The data folder must be in the same place as the app for it to work so please don’t move it.
+
+All text files in the data/text folder will be loaded when the application starts, creating a ix-and-match tapestry of passages. You are free to add your own files and remove the ones in there by default, but all files must use the extension “.txt”
+
+Play around with other bodies of text and see what feels fun or manful to you.
+
+You can even put this read in there, although I don’t really recommend it.
+
+———————————————————
+What if I only want to use one passage instead of having it draw from all of them?
+———————————————————
 
 While the app is running, you can load a single text file from that folder by writing
 “load[name of text file without txt extension]”
 
-For example, to load bladerunner.txt, you would type “loadbladerunner” in the app.
+For example, to load macbeth.txt, you would type “loadmacbeth” in the app.
 You will hear a ding if it found a file to load.
 
 You can type “loadall” to load everything in the text folder. This is what the app does by default when it first launches.
 
+———————————————————
+Can I write my own text to explore?
+———————————————————
+
+I hope you do! Larger bodies of text always work better (think 1000 lines versus 100), but even smaller bits of text can be mixed in with the other text files being loaded. All you need to do is make sure that what you write is stored in a .txt file and that you use line breaks to split up lines (basically, just hit the enter key).
+
+———————————————————
+What if I don’t want it to be full screen?
+———————————————————
+
 You can toggle full screen by clicking the top left corner of the app.
 
+———————————————————
+About this project
+———————————————————
 
+This started as a small text experiment I made for a friend’s party in October of 2015. It was created using openFrameworks.
 
 ———————————————————
 Sound Credits
@@ -59,12 +94,12 @@ Text Credits
 ———————————————————
 These are the texts that Intimate Codex uses by default, which can be found in the data/text folder.
 
-Script of Bladerunner by Hampton Fancher & David Peoples
-The Martian Chronicles by Ray Bradbury
-I Have No Mouth And I Must Scream by Harlan Ellison
-Paladin of the Lost Hour by Harlan Ellison
-“Repent, Harlequin!” Said the Ticktockman by Harlan Ellison
-The Beast That Shouted Love at the Heart of the World by Harlan Ellison
-Macbeth by William Shakespeare
+Special thanks to Project Gutenberg which has compiled plaintext versions of many public domain works. Some of these works were used for the default text files in Intimate Codex
+https://www.gutenberg.org/wiki/Main_Page
 
-
+Alice’s Adventures in Wonderland by Lewis Carrol 
+Dracula by Bram Stoker
+Frankenstein by Mary Shelley
+Fairy Tales by the Brothers Grimm
+Macbeth by Shakespeare
+Metamorphosis by Franz Kafka (translated by David Wyllie)
