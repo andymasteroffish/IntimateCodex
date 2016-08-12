@@ -13,6 +13,11 @@ set(SOURCE_DIRECTORY "../src")
 
 # ===================== Compiler Flags =====================
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
+
+# Set correct shared library search paths
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath,'lib/'")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,'lib/'")
+
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 # =========== Set Global Properties ==============
@@ -50,6 +55,22 @@ set(HEADER_FILES
 # ============ Compile and Link ==================
 
 add_executable(${APP_NAME} ${SOURCE_FILES} ${HEADER_FILES})
+
+# Copy data files to the output directory
+add_custom_command(TARGET IntimateCodex
+		PRE_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/../data ${PROJECT_SOURCE_DIR}/bin/data)
+
+# Create a lib directory for bundled shared libraries
+add_custom_command(TARGET IntimateCodex
+		PRE_BUILD
+		COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_SOURCE_DIR}/bin/lib/)
+
+# Copy the fmod shared library to the lib directory
+add_custom_command(TARGET IntimateCodex
+		PRE_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/../libs/of_v0.9.3_linux64_release/libs/fmodex/lib/linux64/libfmodex.so ${PROJECT_SOURCE_DIR}/bin/lib/)
+
 add_dependencies(${APP_NAME} of_shared)
 target_link_libraries(${APP_NAME} $<TARGET_FILE:of_shared>)
 target_link_libraries(${APP_NAME} ${OF_CORE_LIBS})

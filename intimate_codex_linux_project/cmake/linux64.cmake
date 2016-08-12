@@ -140,6 +140,6 @@ add_library(core OBJECT ${OF_SOURCE_FILES})
 # ===================== Shared lib =====================
 add_library(of_shared SHARED $<TARGET_OBJECTS:core>)
 set_target_properties(of_shared PROPERTIES POSITION_INDEPENDENT_CODE on)
-set_target_properties(of_shared PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/${APP_NAME}.app/Contents/Frameworks)
+set_target_properties(of_shared PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/lib)
 set_target_properties(of_shared PROPERTIES OUTPUT_NAME openFrameworks)
 target_link_libraries(of_shared  ${PLATFORM_LIBRARIES} ${PLATFORM_SHARED_LIBRARIES})
