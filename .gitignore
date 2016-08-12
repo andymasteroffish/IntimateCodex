@@ -1,0 +1,8 @@
+# CLion IDE files
+.idea/
+
+# Output folders
+bin/
+
+# Library folders
+libs/
