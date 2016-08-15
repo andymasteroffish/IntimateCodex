@@ -3,13 +3,13 @@ project(IntimateCodex)
 set(APP_NAME IntimateCodex)
 
 # ===================== Local Directories =====================
-set(PROJECT_ROOT_DIRECTORY "/home/jarl/Programming/IntimateCodex")
+set(PROJECT_ROOT_DIRECTORY "..")
 
 # ===================== oF Directory =====================
 set(OF_DIRECTORY "${PROJECT_ROOT_DIRECTORY}/libs/of_v0.9.3_linux64_release")
 
 # ===================== Source Directory =====================
-set(SOURCE_DIRECTORY "../src")
+set(SOURCE_DIRECTORY "${PROJECT_ROOT_DIRECTORY}c/src")
 
 # ===================== Compiler Flags =====================
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
