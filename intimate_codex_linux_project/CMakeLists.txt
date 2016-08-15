@@ -3,13 +3,13 @@ project(IntimateCodex)
 set(APP_NAME IntimateCodex)
 
 # ===================== Local Directories =====================
-set(PROJECT_ROOT_DIRECTORY "..")
+set(PROJECT_ROOT_DIRECTORY "/home/jarl/Programming/IntimateCodex")
 
 # ===================== oF Directory =====================
 set(OF_DIRECTORY "${PROJECT_ROOT_DIRECTORY}/libs/of_v0.9.3_linux64_release")
 
 # ===================== Source Directory =====================
-set(SOURCE_DIRECTORY "${PROJECT_ROOT_DIRECTORY}c/src")
+set(SOURCE_DIRECTORY "${PROJECT_ROOT_DIRECTORY}/src")
 
 # ===================== Compiler Flags =====================
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
@@ -59,7 +59,7 @@ add_executable(${APP_NAME} ${SOURCE_FILES} ${HEADER_FILES})
 # Copy data files to the output directory
 add_custom_command(TARGET IntimateCodex
 		PRE_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/../data ${PROJECT_SOURCE_DIR}/bin/data)
+		COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_ROOT_DIRECTORY}/data ${PROJECT_SOURCE_DIR}/bin/data)
 
 # Create a lib directory for bundled shared libraries
 add_custom_command(TARGET IntimateCodex
@@ -69,7 +69,7 @@ add_custom_command(TARGET IntimateCodex
 # Copy the fmod shared library to the lib directory
 add_custom_command(TARGET IntimateCodex
 		PRE_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/../libs/of_v0.9.3_linux64_release/libs/fmodex/lib/linux64/libfmodex.so ${PROJECT_SOURCE_DIR}/bin/lib/)
+		COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_ROOT_DIRECTORY}/libs/of_v0.9.3_linux64_release/libs/fmodex/lib/linux64/libfmodex.so ${PROJECT_SOURCE_DIR}/bin/lib/)
 
 add_dependencies(${APP_NAME} of_shared)
 target_link_libraries(${APP_NAME} $<TARGET_FILE:of_shared>)
