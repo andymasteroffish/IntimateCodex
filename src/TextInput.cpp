@@ -75,7 +75,7 @@ void TextInput::keyPressed(int key){
     }
     
     //backspace
-    if (key == 127 && curInput.size() > 0){
+    if ( (key == 127 || key == 8) && curInput.size() > 0){
         curInput.erase(curInput.begin()+curInput.size()-1);
         backspaceSound.play();
     }
