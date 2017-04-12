@@ -140,7 +140,7 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 void ofApp::checkInput(string input){
     vector<string> possibleLines = getLinesWithSameWord(input, curLine);
     
-    //was this a load commane?
+    //was this a load command?
     string commandText = toLowerCase(input);
     if (commandText.find("load") == 0){
         
@@ -204,13 +204,11 @@ void ofApp::setWordsFromLine(string line){
     float curTimeOffset = timingOffsetStart;
     
     for (int i=0; i<rawWords.size(); i++){
-        //cout<<i<<":"<<rawWords[i]<<endl;
         Word thisWord;
         int numMatches = getLinesWithSameWord(rawWords[i], curLine).size();
         string lowercaseWord = toLowerCase(rawWords[i]);;
         bool isIgnoreWord = isWordAnIgnoreWord(lowercaseWord);
         if (isIgnoreWord){
-            //cout<<"we ignore "<<lowercaseWord<<endl;
             numMatches = 0;
         }
         thisWord.setup(rawWords[i], &font, &whooshSounds[ (int)ofRandom(whooshSounds.size())], curTimeOffset, numMatches);
@@ -218,7 +216,6 @@ void ofApp::setWordsFromLine(string line){
         
         if (numMatches > curHighNumMatches){
             curHighNumMatches = numMatches;
-            //cout<<"high word: "<<thisWord.lowercaseText<<" with "<<curHighNumMatches<<endl;
         }
      
         if (curX + thisWord.width > ofGetWidth() - textPaddingXMin){
@@ -264,11 +261,15 @@ vector<string> ofApp::getLinesWithSameWord(string targetWord, string lineToIgnor
                 }
                 
                 if (foundPos + targetWord.length() < thisLine.length()){
+                    
                     char testChar = thisLine[ foundPos+targetWord.length() ];
-                    int thestCharVal = (int)testChar;
-                    if ( (thestCharVal >= 65 && thestCharVal <= 90) || (thestCharVal >= 97 && thestCharVal <= 122) ){
+                    int testCharVal = (int)testChar;
+                    //english characters
+                    if ( (testCharVal >= 65 && testCharVal <= 90) || (testCharVal >= 97 && testCharVal <= 122) ){
                         stillGood = false;
                     }
+                    //still haven't figured out how to test for accented characters
+                    
                 }
                 
                 if (stillGood){
@@ -343,7 +344,6 @@ void ofApp::loadRandomText(){
 
 //--------------------------------------------------------------
 void ofApp::loadText(string filename, bool clearText, bool playSound){
-    
     
     ofBuffer buffer = ofBufferFromFile(filename);
     

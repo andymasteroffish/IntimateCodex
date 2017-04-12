@@ -18,6 +18,7 @@ public:
     void update();
     void draw();
     void keyPressed(int key);
+    string getInternationalCharacter(int codePoint);
     string getInput();
     
     ofTrueTypeFont * font;

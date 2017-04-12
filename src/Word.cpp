@@ -59,12 +59,16 @@ void Word::update(float deltaTime, string curEntry, int highNumMatches){
     if (findPos == 0 && curEntry.length() > 0){
         showAltColor = true;
         
-        //the text either has to fill it up or be followed by a non-letter
+        //the text either has to fill it up or be followed by a single non-letter
         if (curEntry.length() < lowercaseText.length()){
-            char testChar = lowercaseText[curEntry.length()];
-            int testCharVal = (int)testChar;
-            if ( (testCharVal >= 65 && testCharVal <= 90) || (testCharVal >= 97 && testCharVal <= 122) ){
+            if (curEntry.length() < lowercaseText.length() -1){
                 showAltColor = false;
+            }else{
+                char testChar = lowercaseText[curEntry.length()];
+                int testCharVal = (int)testChar;
+                if ( (testCharVal >= 65 && testCharVal <= 90) || (testCharVal >= 97 && testCharVal <= 122) ){
+                    showAltColor = false;
+                }
             }
         }
         
