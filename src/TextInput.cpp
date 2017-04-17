@@ -65,6 +65,7 @@ void TextInput::draw(){
 }
 
 void TextInput::keyPressed(int key){
+    //cout<<"codepoint: "<<key<<endl;
     //checking english characters
     if ((key >= 65 && key <= 90) || (key >= 97 && key <= 122) || (key >= 48 && key <= 57) || key == 39){
         char thisChar = (char)key;

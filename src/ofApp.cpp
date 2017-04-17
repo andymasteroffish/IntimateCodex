@@ -146,7 +146,7 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 void ofApp::checkInput(string input){
     vector<string> possibleLines = getLinesWithSameWord(input, curLine);
     
-    //was this a load command?
+    //was this a command?
     string commandText = toLowerCase(input);
     if (commandText.find("load") == 0){
         
@@ -308,7 +308,7 @@ vector<string> ofApp::getLinesWithSameWord(string targetWord, string lineToIgnor
 
 //--------------------------------------------------------------
 string ofApp::toLowerCase(string input){
-    string returnVal = input;
+    string returnVal = mixDownAccents( input );
     for (int i=0; i<returnVal.length(); i++){
         returnVal[i] = tolower(returnVal[i]);
     }
@@ -415,4 +415,44 @@ void ofApp::loadText(string filename, bool clearText, bool playSound){
     }
     
     cout<<"total lines: "<<fullText.size()<<endl;
+}
+
+//--------------------------------------------------------------
+string ofApp::mixDownAccents(string source){
+    cout<<"mixing down "<<source<<endl;
+    string output = "";
+    bool nextCharIsAccent = false;
+    while (source.size() > 0){
+        string letter = source.substr(0,1);
+        cout<<letter<<endl;
+        if (!nextCharIsAccent){
+            if (letter == "\303"){
+                cout<<"goop"<<endl;
+                nextCharIsAccent = true;
+            }else{
+                output += letter;
+            }
+        }else{
+            nextCharIsAccent = false;
+            output += AccentedCharCodeToEnglishChar(letter);
+        }
+        source = source.substr(1,source.size());
+    }
+    cout<<"done: "<<output<<endl;
+    return output;
+}
+
+//--------------------------------------------------------------
+string ofApp::AccentedCharCodeToEnglishChar(string code){
+    
+    if (code == "\240")     return "a"; //à
+    if (code == "\241")     return "a"; //á
+    
+    if (code == "\254")     return "i"; //ì
+    
+    //this should signlore single srtoke letters like 'Ñ', but they'll still get caught up in mixDownAccents
+    if (code == "\261")     return "ñ";
+    
+    cout<<"could not find"<<endl;
+    return "?";
 }

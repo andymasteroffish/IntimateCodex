@@ -36,6 +36,8 @@ class ofApp : public ofBaseApp{
     void loadRandomText();
     
     void loadText(string filename, bool clearText, bool playSound);
+    string mixDownAccents(string source);
+    string AccentedCharCodeToEnglishChar(string code);
     
     //timing
     float prevFrameTime;

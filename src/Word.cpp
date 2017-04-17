@@ -56,6 +56,7 @@ void Word::update(float deltaTime, string curEntry, int highNumMatches){
     pos.y = anchorPos.y -range/2 + ofNoise(ofGetElapsedTimef()*speed, seed, 100) * range + shake.y;
     
     showAltColor = false;
+    cout<<"lower: "<<lowercaseText<<endl;
     size_t findPos = lowercaseText.find(curEntry);
     if (findPos == 0 && curEntry.length() > 0){
         showAltColor = true;
