@@ -387,7 +387,7 @@ void ofApp::loadText(string filename, bool clearText, bool playSound){
             
             if (line.length() > 2){
                 
-                string lowerLine = toLowerCase(line, true);
+                string lowerLine = toLowerCase(line);
                 fullText.push_back(line);
                 fullTextLower.push_back(lowerLine);
             }
@@ -446,12 +446,11 @@ string ofApp::mixDownAccents(string source, bool printDebugInfo){
 //--------------------------------------------------------------
 string ofApp::AccentedCharCodeToEnglishChar(string code, bool printDebugInfo){
     
-    //ÀÁÂÃÄÅ
+    //ÀÁÂÃÅ
     if (code == "\200")     return "A";
     if (code == "\201")     return "A";
     if (code == "\202")     return "A";
     if (code == "\203")     return "A";
-    if (code == "\204")     return "A";
     if (code == "\205")     return "A";
     
     //ÈÉÊË
@@ -469,28 +468,25 @@ string ofApp::AccentedCharCodeToEnglishChar(string code, bool printDebugInfo){
     //Ð
     if (code == "\220")     return "D";
     
-    //ÒÓÔÕÖØ
+    //ÒÓÔÕØ
     if (code == "\222")     return "O";
     if (code == "\223")     return "O";
     if (code == "\224")     return "O";
     if (code == "\225")     return "O";
-    if (code == "\226")     return "O";
     if (code == "\230")     return "O";
     
-    //ÙÚÜ
+    //ÙÚ
     if (code == "\231")     return "U";
     if (code == "\232")     return "U";
-    if (code == "\234")     return "U";
     
     //Ý
     if (code == "\235")     return "Y";
     
-    //àáâãäå
+    //àáâãå
     if (code == "\240")     return "a";
     if (code == "\241")     return "a";
     if (code == "\242")     return "a";
     if (code == "\243")     return "a";
-    if (code == "\244")     return "a";
     if (code == "\245")     return "a";
     
     //èéêë
@@ -511,14 +507,13 @@ string ofApp::AccentedCharCodeToEnglishChar(string code, bool printDebugInfo){
     if (code == "\263")     return "o";
     if (code == "\264")     return "o";
     if (code == "\265")     return "o";
-    if (code == "\266")     return "o";
     if (code == "\270")     return "o";
     
-    //ùúûü
+    //ùúû
     if (code == "\271")     return "u";
     if (code == "\272")     return "u";
     if (code == "\273")     return "u";
-    if (code == "\274")     return "u";
+    
     
     //ýÿ
     if (code == "\275")     return "y";
@@ -531,6 +526,15 @@ string ofApp::AccentedCharCodeToEnglishChar(string code, bool printDebugInfo){
     
     if (code == "\221")     return "Ñ";
     if (code == "\261")     return "ñ";
+    
+    if (code == "\204")     return "Ä";
+    if (code == "\244")     return "ä";
+    
+    if (code == "\226")     return "Ö";
+    if (code == "\266")     return "ö";
+    
+    if (code == "\234")     return "Ü";
+    if (code == "\274")     return "ü";
     
     if (code == "\237")     return "ß";
     
