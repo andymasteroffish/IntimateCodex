@@ -163,13 +163,18 @@ void ofApp::checkInput(string input){
         }
     }
     
-     if (commandText.find("textsize") == 0){
-         string sizeText =  commandText.substr(8, commandText.length());
-         if (isStringAPositiveNumber(sizeText)){
-             int newTextSize = stoi(sizeText);
-             setTextSize(newTextSize);
-         }
-     }
+    if (commandText.find("textsize") == 0){
+        string sizeText =  commandText.substr(8, commandText.length());
+        if (isStringAPositiveNumber(sizeText)){
+            int newTextSize = stoi(sizeText);
+            setTextSize(newTextSize);
+        }
+    }
+    
+    if (commandText.find("togglefull") == 0){
+        ofToggleFullscreen();
+        background.shuffle();
+    }
     
     if (possibleLines.size() > 0){
         setWordsFromLine( possibleLines[ (int)ofRandom(possibleLines.size()) ] );
