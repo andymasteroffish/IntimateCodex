@@ -307,8 +307,8 @@ vector<string> ofApp::getLinesWithSameWord(string targetWord, string lineToIgnor
 }
 
 //--------------------------------------------------------------
-string ofApp::toLowerCase(string input){
-    string returnVal = mixDownAccents( input );
+string ofApp::toLowerCase(string input, bool printDebugInfo){
+    string returnVal = mixDownAccents( input, printDebugInfo );
     for (int i=0; i<returnVal.length(); i++){
         returnVal[i] = tolower(returnVal[i]);
     }
@@ -385,9 +385,9 @@ void ofApp::loadText(string filename, bool clearText, bool playSound){
         while(buffer.isLastLine() == false){
             string line = buffer.getNextLine();
             
-            if (line.length() > 5){
+            if (line.length() > 2){
                 
-                string lowerLine = toLowerCase(line);
+                string lowerLine = toLowerCase(line, true);
                 fullText.push_back(line);
                 fullTextLower.push_back(lowerLine);
             }
@@ -418,41 +418,129 @@ void ofApp::loadText(string filename, bool clearText, bool playSound){
 }
 
 //--------------------------------------------------------------
-string ofApp::mixDownAccents(string source){
-    cout<<"mixing down "<<source<<endl;
+string ofApp::mixDownAccents(string source, bool printDebugInfo){
+    if (printDebugInfo) cout<<"mixing down "<<source<<endl;
     string output = "";
     bool nextCharIsAccent = false;
     while (source.size() > 0){
         string letter = source.substr(0,1);
-        cout<<letter<<endl;
+        //if (printDebugInfo) cout<<letter<<endl;
         if (!nextCharIsAccent){
             if (letter == "\303"){
-                cout<<"goop"<<endl;
+                //if (printDebugInfo) cout<<"special ";
                 nextCharIsAccent = true;
             }else{
                 output += letter;
             }
         }else{
+            //if (printDebugInfo) cout<<letter<<endl;
             nextCharIsAccent = false;
-            output += AccentedCharCodeToEnglishChar(letter);
+            output += AccentedCharCodeToEnglishChar(letter, printDebugInfo);
         }
         source = source.substr(1,source.size());
     }
-    cout<<"done: "<<output<<endl;
+    if (printDebugInfo)  cout<<"done: "<<output<<endl;
     return output;
 }
 
 //--------------------------------------------------------------
-string ofApp::AccentedCharCodeToEnglishChar(string code){
+string ofApp::AccentedCharCodeToEnglishChar(string code, bool printDebugInfo){
     
-    if (code == "\240")     return "a"; //à
-    if (code == "\241")     return "a"; //á
+    //ÀÁÂÃÄÅ
+    if (code == "\200")     return "A";
+    if (code == "\201")     return "A";
+    if (code == "\202")     return "A";
+    if (code == "\203")     return "A";
+    if (code == "\204")     return "A";
+    if (code == "\205")     return "A";
     
-    if (code == "\254")     return "i"; //ì
+    //ÈÉÊË
+    if (code == "\210")     return "E";
+    if (code == "\211")     return "E";
+    if (code == "\212")     return "E";
+    if (code == "\213")     return "E";
     
-    //this should signlore single srtoke letters like 'Ñ', but they'll still get caught up in mixDownAccents
+    //ÌÍÎÏ
+    if (code == "\214")     return "I";
+    if (code == "\215")     return "I";
+    if (code == "\216")     return "I";
+    if (code == "\217")     return "I";
+    
+    //Ð
+    if (code == "\220")     return "D";
+    
+    //ÒÓÔÕÖØ
+    if (code == "\222")     return "O";
+    if (code == "\223")     return "O";
+    if (code == "\224")     return "O";
+    if (code == "\225")     return "O";
+    if (code == "\226")     return "O";
+    if (code == "\230")     return "O";
+    
+    //ÙÚÜ
+    if (code == "\231")     return "U";
+    if (code == "\232")     return "U";
+    if (code == "\234")     return "U";
+    
+    //Ý
+    if (code == "\235")     return "Y";
+    
+    //àáâãäå
+    if (code == "\240")     return "a";
+    if (code == "\241")     return "a";
+    if (code == "\242")     return "a";
+    if (code == "\243")     return "a";
+    if (code == "\244")     return "a";
+    if (code == "\245")     return "a";
+    
+    //èéêë
+    if (code == "\250")     return "e";
+    if (code == "\251")     return "e";
+    if (code == "\252")     return "e";
+    if (code == "\253")     return "e";
+    
+    //ìíîï
+    if (code == "\254")     return "i";
+    if (code == "\255")     return "i";
+    if (code == "\256")     return "i";
+    if (code == "\257")     return "i";
+    
+    //ðòóôõöø
+    if (code == "\260")     return "o";
+    if (code == "\262")     return "o";
+    if (code == "\263")     return "o";
+    if (code == "\264")     return "o";
+    if (code == "\265")     return "o";
+    if (code == "\266")     return "o";
+    if (code == "\270")     return "o";
+    
+    //ùúûü
+    if (code == "\271")     return "u";
+    if (code == "\272")     return "u";
+    if (code == "\273")     return "u";
+    if (code == "\274")     return "u";
+    
+    //ýÿ
+    if (code == "\275")     return "y";
+    if (code == "\277")     return "y";
+    
+    
+    //this should ignore single srtoke letters like 'Ñ', but they'll still get caught up when looking for special characters
+    if (code == "\207")     return "Ç";
+    if (code == "\247")     return "ç";
+    
+    if (code == "\221")     return "Ñ";
     if (code == "\261")     return "ñ";
     
-    cout<<"could not find"<<endl;
+    if (code == "\237")     return "ß";
+    
+    if (code == "\206")     return "Æ";
+    if (code == "\246")     return "æ";
+    
+    if (code == "\236")     return "Þ";
+    if (code == "\276")     return "þ";
+    
+    
+    if (printDebugInfo)     cout<<"could not find "<<code<<endl;
     return "?";
 }

@@ -26,7 +26,7 @@ class ofApp : public ofBaseApp{
     void setWordsFromLine(string line);
     
     vector<string> getLinesWithSameWord(string targetWord, string lineToIgnore);
-    string toLowerCase(string input);
+    string toLowerCase(string input, bool printDebugInfo = false);
     
     bool isWordAnIgnoreWord(string input);
     bool isStringAPositiveNumber(string input);
@@ -36,8 +36,8 @@ class ofApp : public ofBaseApp{
     void loadRandomText();
     
     void loadText(string filename, bool clearText, bool playSound);
-    string mixDownAccents(string source);
-    string AccentedCharCodeToEnglishChar(string code);
+    string mixDownAccents(string source, bool printDebugInfo);
+    string AccentedCharCodeToEnglishChar(string code, bool printDebugInfo);
     
     //timing
     float prevFrameTime;
