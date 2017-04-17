@@ -34,7 +34,8 @@ void Word::setPos(float x, float y){
 void Word::update(float deltaTime, string curEntry, int highNumMatches){
     timer += deltaTime;
     
-    float range = 40;
+    
+    float range = font->getLineHeight()*0.5f;//40;
     float speed = 0.1;
     
     ofVec2f shake(0,0);
@@ -66,7 +67,7 @@ void Word::update(float deltaTime, string curEntry, int highNumMatches){
             }else{
                 char testChar = lowercaseText[curEntry.length()];
                 int testCharVal = (int)testChar;
-                if ( (testCharVal >= 65 && testCharVal <= 90) || (testCharVal >= 97 && testCharVal <= 122) ){
+                if ( (testCharVal >= 65 && testCharVal <= 90) || (testCharVal >= 97 && testCharVal <= 122) || (testCharVal >= 48 && testCharVal <= 57) ){
                     showAltColor = false;
                 }
             }

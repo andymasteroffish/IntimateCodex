@@ -8,6 +8,7 @@
 class ofApp : public ofBaseApp{
 	public:
 		void setup();
+        void setTextSize(int newSize);
 		void update();
 		void draw();
 		
@@ -28,6 +29,7 @@ class ofApp : public ofBaseApp{
     string toLowerCase(string input);
     
     bool isWordAnIgnoreWord(string input);
+    bool isStringAPositiveNumber(string input);
     
     void loadIgnoreWords();
     void loadAllText();
@@ -45,6 +47,7 @@ class ofApp : public ofBaseApp{
     //showing the screen
     ofTrueTypeFont font, fontInput;
     string curLine;
+    float curTextSize;
     vector<Word> curWords;
     
     int curHighNumMatches;

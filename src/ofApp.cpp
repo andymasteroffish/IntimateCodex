@@ -14,8 +14,7 @@ void ofApp::setup(){
 //    font.loadFont("Eric Normal.ttf", 50);
 //    fontInput.loadFont("Eric Normal.ttf", 70);    
     
-    font.load("FutuLt__.ttf", 50);
-    fontInput.load("FutuLt__.ttf", 70);
+    setTextSize(50);
     
     textInput.setup(&fontInput);
     
@@ -45,6 +44,13 @@ void ofApp::setup(){
     
     ofEnableAlphaBlending();
     
+}
+
+//--------------------------------------------------------------
+void ofApp::setTextSize(int newSize){
+    curTextSize = newSize;
+    font.load("FutuLt__.ttf", newSize);
+    fontInput.load("FutuLt__.ttf", newSize+20);
 }
 
 //--------------------------------------------------------------
@@ -157,6 +163,14 @@ void ofApp::checkInput(string input){
         }
     }
     
+     if (commandText.find("textsize") == 0){
+         string sizeText =  commandText.substr(8, commandText.length());
+         if (isStringAPositiveNumber(sizeText)){
+             int newTextSize = stoi(sizeText);
+             setTextSize(newTextSize);
+         }
+     }
+    
     if (possibleLines.size() > 0){
         setWordsFromLine( possibleLines[ (int)ofRandom(possibleLines.size()) ] );
     }else{
@@ -172,13 +186,13 @@ void ofApp::setWordsFromLine(string line){
     curWords.clear();
     curLine = line;
     
-    float textPaddingXMin = 40;
-    float textPaddingXMax = 150;
-    float textPaddingY = 200;
-    float xSpacingMin = 25;
-    float xSpacingMax = 45;
-    float ySpacing = 75;
-    float ySPacingRange = 30;
+    float textPaddingXMin = curTextSize*0.8f;   // 40;
+    float textPaddingXMax = curTextSize*3;      //150;
+    float textPaddingY = curTextSize*4;         //200;
+    float xSpacingMin = curTextSize*0.5f;       //25;
+    float xSpacingMax = curTextSize*0.9f;       //45;
+    float ySpacing = curTextSize*1.5f;          //75;
+    float ySPacingRange = curTextSize*0.6f;     //30;
     
     float timingOffsetStart = -0.1;
     float timingOffsetMin = 0.01;
@@ -265,7 +279,7 @@ vector<string> ofApp::getLinesWithSameWord(string targetWord, string lineToIgnor
                     char testChar = thisLine[ foundPos+targetWord.length() ];
                     int testCharVal = (int)testChar;
                     //english characters
-                    if ( (testCharVal >= 65 && testCharVal <= 90) || (testCharVal >= 97 && testCharVal <= 122) ){
+                    if ( (testCharVal >= 65 && testCharVal <= 90) || (testCharVal >= 97 && testCharVal <= 122) || (testCharVal >= 48 && testCharVal <= 57) ){
                         stillGood = false;
                     }
                     //still haven't figured out how to test for accented characters
@@ -304,6 +318,16 @@ bool ofApp::isWordAnIgnoreWord(string input){
         }
     }
     return false;
+}
+
+//--------------------------------------------------------------
+bool ofApp::isStringAPositiveNumber(string input){
+    for (int i=0; i<input.size(); i++){
+        if (input[i]!='0' && input[i]!='1' && input[i]!='2' && input[i]!='3' && input[i]!='4' && input[i]!='5' && input[i]!='6' && input[i]!='7' && input[i]!='8' && input[i]!='9'){
+            return false;
+        }
+    }
+    return true;
 }
 
 //--------------------------------------------------------------
